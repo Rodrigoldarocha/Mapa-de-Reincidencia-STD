@@ -1,114 +1,200 @@
 # 📊 Mapa de Reincidência de Chamados
 
-> 🔍 Transformando dados de chamados em decisões estratégicas
+> 🔍 **Transformando dados de manutenção em decisões estratégicas.**
+
+Ferramenta de análise que identifica **falhas recorrentes, problemas mal resolvidos e impactos financeiros** a partir de dados de chamados de manutenção.
 
 ---
 
 ## 🎯 Sobre o Projeto
 
-O **Mapa de Reincidência** é uma ferramenta de análise que identifica padrões de falhas recorrentes em chamados de manutenção.
+O **Mapa de Reincidência** analisa históricos de chamados para encontrar padrões que normalmente passam despercebidos.
 
-A partir de um arquivo CSV exportado do sistema, ele entrega:
+### 🔎 O que identifica
 
-- 📍 Locais com maior reincidência  
-- 🔁 Problemas que voltam a acontecer  
-- ⚠️ Serviços mal resolvidos  
-- 💸 Impacto financeiro da recorrência  
-- 🧠 Evidência textual de falhas recorrentes  
+* 📍 Locais com maior reincidência
+* 🔁 Problemas que voltam a acontecer
+* ⚠️ Serviços potencialmente mal resolvidos
+* 💸 Impacto financeiro das recorrências
+* 🧠 Evidências textuais nas descrições dos chamados
+* 📈 Tendências e concentração de problemas
 
-📦 **Saída final:** Excel completo + gráficos prontos para gestão
+**Resultado:** um ranking de criticidade que ajuda a transformar dados operacionais em **ações de manutenção**.
 
 ---
 
 ## 🧠 Lógica de Criticidade
 
+O projeto combina reincidência, avaliação, custo e evidências textuais.
+
 ```python
 score_base = reincidencias * (10 - nota_media)
 
-score_avancado = score_base * (1 + custo_acumulado / custo_maximo) * bonus_textual
+score_avancado = (
+    score_base
+    * (1 + custo_acumulado / custo_maximo)
+    * bonus_textual
+)
+```
 
+### 🧠 Evidência textual
 
-Bônus textual (+20%) quando há recorrência explícita nas descrições:
+Um bônus de **20%** pode ser aplicado quando a descrição apresenta indícios explícitos de recorrência, como:
 
-"voltou", "mesmo problema", "não resolveu"
+```text
+"voltou"
+"mesmo problema"
+"não resolveu"
+```
 
-🚨 Por que usar?
-Problema	Impacto
-Repetição de chamados	💸 Custos duplicados
-Solução temporária	📉 Baixa qualidade
-Falhas recorrentes	🏭 Impacto operacional
-SLA comprometido	⚖️ Risco contratual
+### 🚨 Por que isso importa?
 
-👉 O projeto gera um ranking de criticidade acionável
+| Problema                 | Impacto                |
+| ------------------------ | ---------------------- |
+| 🔁 Repetição de chamados | 💸 Custos duplicados   |
+| 🛠️ Solução temporária   | 📉 Baixa qualidade     |
+| ⚠️ Falhas recorrentes    | 🏭 Impacto operacional |
+| ⏱️ SLA comprometido      | ⚖️ Risco contratual    |
 
-📦 Output
-📁 resultado_reincidencia.xlsx
-📊 Resumo Executivo
-🥇 Ranking por Local
-🧠 Análise de Texto
-🔤 Termos mais frequentes
-🗂️ Dados brutos enriquecidos
-📈 Gráficos
-Ranking Top N
-Heatmap de reincidência
-Distribuição de criticidade
-Comparativo temporal vs textual
-Análise de termos
+---
 
-🛠️ Stack
+## 📦 Resultados
 
-🐍 Python 3
-📊 pandas
-📈 matplotlib / seaborn
-📄 openpyxl
-📓 Jupyter Notebook
-▶️ Como rodar
+O processamento gera:
 
+### 📄 Excel
 
-1. Instalar dependências
+`resultado_reincidencia.xlsx`
 
+Com:
+
+* 📊 Resumo executivo
+* 🥇 Ranking por local
+* 🧠 Análise textual
+* 🔤 Termos mais frequentes
+* 🗂️ Dados enriquecidos
+
+### 📈 Visualizações
+
+* 🥇 Ranking Top N
+* 🔥 Heatmap de reincidência
+* 📊 Distribuição de criticidade
+* 📅 Análise temporal
+* 🧠 Comparativo temporal × textual
+* 🔤 Frequência de termos
+
+---
+
+## 🛠️ Stack
+
+* 🐍 **Python 3**
+* 📊 **Pandas**
+* 🔢 **NumPy**
+* 📈 **Matplotlib**
+* 🎨 **Seaborn**
+* 📄 **OpenPyXL**
+* 📓 **Jupyter Notebook**
+
+---
+
+## ▶️ Como executar
+
+### 1. Instale as dependências
+
+```bash
 pip install pandas numpy matplotlib seaborn openpyxl
+```
 
-2. Executar
-Coloque o CSV na pasta do projeto
-Abra o notebook .ipynb
-Clique em Run All
+### 2. Execute o projeto
 
-✔️ O arquivo Excel será gerado automaticamente ao final
+Coloque o arquivo CSV na pasta do projeto e abra o notebook:
 
-⚙️ Parâmetros
+```text
+.ipynb
+```
 
+Depois:
+
+```text
+Run All ▶️
+```
+
+O arquivo Excel será gerado automaticamente ao final do processamento.
+
+---
+
+## ⚙️ Parâmetros
+
+Os principais parâmetros podem ser ajustados no notebook:
+
+```python
 JANELA_REINCIDENCIA = 90  # dias
 TOP_N = 15
 NOTA_PADRAO = 7
+```
 
-📄 Estrutura do CSV
-Campo	Obrigatório
-Numero_Chamado	✅
-Local_Nome	✅
-Tipo	✅
-Data_Criacao	✅
-Valor_Total	✅
-Nota_Inicial	✅
+---
 
-📈 Qualidade
-Métrica	Status
-Testes	✅ 10 passando
-Bugs críticos	✅ 100% corrigidos
-Performance	⚡ Otimizada
-Manutenibilidade	🧼 Alta
+## 📄 Dados de Entrada
 
-🧩 Roadmap
- Dashboard interativo (Streamlit / Power BI)
- Integração com API de chamados
- Alertas automáticos de reincidência
- Machine Learning para previsão de falhas
-🤝 Contribuição
+O CSV deve conter os seguintes campos:
 
-Sugestões e melhorias são bem-vindas via:
+| Campo            | Obrigatório |
+| ---------------- | ----------- |
+| `Numero_Chamado` | ✅           |
+| `Local_Nome`     | ✅           |
+| `Tipo`           | ✅           |
+| `Data_Criacao`   | ✅           |
+| `Valor_Total`    | ✅           |
+| `Nota_Inicial`   | ✅           |
 
-Pull Requests
-Issues
-📌 Resumo
+---
 
-Dados brutos → Diagnóstico → Prioridade → Ação
+## 📈 Qualidade
+
+| Métrica             | Status        |
+| ------------------- | ------------- |
+| 🧪 Testes           | ✅ 10 passando |
+| 🐛 Bugs críticos    | ✅ Corrigidos  |
+| ⚡ Performance       | Otimizada     |
+| 🧼 Manutenibilidade | Alta          |
+
+---
+
+## 🧩 Roadmap
+
+* [ ] 📊 Dashboard interativo com Streamlit / Power BI
+* [ ] 🔌 Integração com API de chamados
+* [ ] 🚨 Alertas automáticos de reincidência
+* [ ] 🤖 Machine Learning para previsão de falhas
+* [ ] 📡 Monitoramento contínuo dos indicadores
+
+---
+
+## 🤝 Contribuição
+
+Sugestões e melhorias são bem-vindas através de:
+
+* 💡 Issues
+* 🔀 Pull Requests
+* 📝 Sugestões de melhoria
+
+---
+
+## 📌 Resumo
+
+```text
+📥 Dados brutos
+      ↓
+🔎 Diagnóstico
+      ↓
+🔁 Identificação de reincidências
+      ↓
+📊 Criticidade
+      ↓
+🎯 Priorização
+      ↓
+🛠️ Ação
+```
+
+> **O objetivo não é apenas identificar chamados repetidos, mas descobrir onde a manutenção está falhando e transformar essa informação em prioridade operacional.**
