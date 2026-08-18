@@ -58,9 +58,28 @@ Um bônus de **20%** pode ser aplicado quando a descrição apresenta indícios 
 
 ---
 
+## 🏗️ Fluxo de processamento
+
+```text
+Dados brutos (CSV) → Pré-processamento → Reincidência temporal (janela 90 dias)
+→ Análise textual → Resumo Local × Tipo → Score de criticidade
+→ Visualizações → Excel formatado → Testes de validação
+```
+
+---
+
 ## 📦 Resultados
 
 O processamento gera:
+
+### 📊 Números reais (base de ~11 mil chamados)
+
+| Cenário | Chamados | Taxa de reincidência | Custo médio |
+|---------|----------|----------------------|-------------|
+| Sem linguagem de recorrência | 10.367 | 48,7% | R$ 748,70 |
+| Com linguagem de recorrência | 687 | 52,4% | R$ 2.534,72 |
+
+💡 Chamados que mencionam recorrência na descrição **custam ~3,4× mais** — evidência de que o bônus textual do score captura problemas mal resolvidos.
 
 ### 📄 Excel
 
@@ -94,6 +113,15 @@ Com:
 * 🎨 **Seaborn**
 * 📄 **OpenPyXL**
 * 📓 **Jupyter Notebook**
+
+---
+
+## 📁 Estrutura do projeto
+
+```text
+Mapa_de_reincidencia_STD_v3.ipynb  # notebook principal (11 etapas)
+resultado_reincidencia.xlsx        # gerado ao final do processamento
+```
 
 ---
 
@@ -178,6 +206,12 @@ Sugestões e melhorias são bem-vindas através de:
 * 💡 Issues
 * 🔀 Pull Requests
 * 📝 Sugestões de melhoria
+
+---
+
+## 👨‍💻 Autor
+
+**Rodrigo Rocha** — [GitHub](https://github.com/Rodrigoldarocha) · [LinkedIn](https://www.linkedin.com/in/rodrigo-rocha-19249170/)
 
 ---
 
